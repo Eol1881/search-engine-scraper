@@ -1,0 +1,27 @@
+{
+  "name": "yandex-parser",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --experimental-strip-types --env-file=.env ./src/companies.cli/cli.update-saved-companies.mts",
+    "start-bun": "bun run ./src/cli/cli.update-saved-companies.mts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@lem0-packages/puppeteer-page-proxy": "^1.4.1",
+    "puppeteer": "^24.2.1",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-fingerprinter": "^1.1.9",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "puppeteer-proxy": "^1.0.3",
+    "user-agents": "^1.1.450",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/user-agents": "^1.0.4",
+    "typescript": "^5.7.3"
+  }
+}

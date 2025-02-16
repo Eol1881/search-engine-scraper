@@ -1,0 +1,4 @@
+.render
+node_modules
+.env
+screens

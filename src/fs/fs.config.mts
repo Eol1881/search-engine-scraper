@@ -1,3 +1,3 @@
 export type FsConfig = {
-  dbPath: string
-}
+  dbPath: string;
+};

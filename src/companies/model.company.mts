@@ -1,4 +1,4 @@
 export type Company = {
-    url: string
-    emails: string[]
-}
+  url: string;
+  emails: string[];
+};

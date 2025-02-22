@@ -3,20 +3,37 @@
   "version": "0.0.1",
   "scripts": {
     "start-node": "node --experimental-strip-types --env-file=.env ./src/companies.cli/cli.update-saved-companies.mts",
-    "start-bun": "bun run ./src/cli/cli.update-saved-companies.mts"
+    "start-bun": "bun run ./src/cli/cli.update-saved-companies.mts",
+    "install-browsers": "playwright install",
+    "type-check": "tsc --noEmit",
+    "prepare": "husky install",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
+    "format": "prettier . --write"
   },
   "dependencies": {
-    "@lem0-packages/puppeteer-page-proxy": "^1.4.1",
-    "puppeteer": "^24.2.1",
-    "puppeteer-extra": "^3.3.6",
-    "puppeteer-extra-plugin-fingerprinter": "^1.1.9",
-    "puppeteer-extra-plugin-stealth": "^2.11.2",
-    "puppeteer-proxy": "^1.0.3",
-    "user-agents": "^1.1.450",
+    "@playwright/test": "^1.50.1",
+    "playwright": "^1.50.1",
+    "user-agents": "^1.1.458",
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@eslint/js": "^9.21.0",
+    "@limegrass/eslint-plugin-import-alias": "^1.5.0",
+    "@types/node": "^22.13.5",
     "@types/user-agents": "^1.0.4",
-    "typescript": "^5.7.3"
+    "eslint": "^9.21.0",
+    "eslint-config-prettier": "^10.0.1",
+    "globals": "^16.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.3",
+    "prettier": "^3.5.2",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.24.1"
+  },
+  "lint-staged": {
+    "*.{js,cjs,mjs,jsx,ts,tsx,mts}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   }
 }

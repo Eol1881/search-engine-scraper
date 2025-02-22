@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
-import { type FsConfig } from "@/fs/fs.config.mts";
+import { type FsConfig } from "../fs/fs.config.mts";
 
 export const buildFsSave =
   (config: FsConfig) =>

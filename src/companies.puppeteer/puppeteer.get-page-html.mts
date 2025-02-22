@@ -1,4 +1,4 @@
-import type { Service } from "@/lib/service.mts";
+import type { Service } from "../lib/service.mts";
 
 export const buildPuppeteerGetPageHtml =
   (getPageContent: Service<[url: string], string>) =>

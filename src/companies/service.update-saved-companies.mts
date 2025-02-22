@@ -1,5 +1,5 @@
-import type { Service } from "@/lib/service.mts";
-import type { Company } from "@/companies/model.company.mts";
+import type { Service } from "../lib/service.mts";
+import type { Company } from "./model.company.mts";
 
 export const buildUpdateSavedCompaniesService =
   (

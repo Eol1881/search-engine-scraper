@@ -1,5 +1,5 @@
 import process from "node:process";
-import { type CliConfig } from "@/cli/cli.composer.mts";
+import { type CliConfig } from "./cli.composer.mts";
 import { z } from "zod";
 
 const ProxyConfigSchema = z.object({

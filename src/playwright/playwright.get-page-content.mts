@@ -2,13 +2,9 @@ import UserAgent from "user-agents";
 import playwright from "playwright";
 
 export type PlaywrightConfig = {
-  proxy: {
-    isActive: boolean;
-    protocol: string;
-    login: string;
-    password: string;
-    url: string;
-  };
+  proxy: { isActive: boolean; port: string };
+  isTest: boolean;
+  testUrl: string | null;
   browser: {
     slowMo: number;
     additionalArgs: string[];
@@ -16,7 +12,6 @@ export type PlaywrightConfig = {
     env: Record<string, string>;
     fakeHeaders: Record<string, string>;
     timeout: number;
-    testUrl: string | null;
   };
   userAgent: {
     device: "desktop" | "mobile" | "tablet";
@@ -32,13 +27,8 @@ export const buildPlaywrightGetPageContent =
       headless: config.browser.headless,
       args: config.browser.additionalArgs,
       env: config.browser.env,
+      proxy: config.proxy.isActive ? { server: `socks5://localhost:${config.proxy.port}` } : undefined,
     });
-
-    // if (config.proxy.isActive === true) {
-    //   const proxyUrl = `${config.proxy.protocol}://${config.proxy.login}:${config.proxy.password}@${config.proxy.url}`
-    //   console.log('proxy', proxyUrl)
-    //   await useProxy(page, proxyUrl)
-    // }
 
     const context = await browser.newContext({
       viewport: { width: 1280, height: 720 },
@@ -64,24 +54,21 @@ export const buildPlaywrightGetPageContent =
 
     const page = await context.newPage();
 
-    // https://yandex.ru/search/?text=%D0%BF%D0%B8%D0%B4%D1%80&search_source=dzen_desktop_safe&lr=2
-    // await page.goto("https://abrahamjuliot.github.io/creepjs/", { waitUntil: "domcontentloaded" });
+    // await page.route("**/*.{png,jpg,jpeg}", (route) => route.abort()); /// TODO: abort useless request in order to save traffic (?)
 
-    // await page.type("#user-name", "text", { delay: getRandomDelay() });
-    // await page.evaluate(() => window.scrollBy(0, window.innerHeight));
+    // await page.type("#user-name", "text", { delay: getRandomDelay() }); // TODO: implement human-like behaviour
+    // await page.evaluate(() => window.scrollBy(0, window.innerHeight)); // TODO: implement human-like behaviour
 
     await page.mouse.move(Math.random() * 800, Math.random() * 600);
     await page.waitForTimeout(1000);
 
-    if (config.browser.testUrl !== null) {
-      await page.goto(config.browser.testUrl, {
-        waitUntil: "domcontentloaded",
-      });
-      await page.waitForTimeout(1000000);
+    if (config.isTest && config.testUrl) {
+      await page.goto(config.testUrl, { waitUntil: "domcontentloaded" });
       await page.screenshot({
         path: `./screens/${Date.now()}-result.png`,
         fullPage: true,
       });
+      await page.waitForTimeout(1000000);
       return "";
     }
 

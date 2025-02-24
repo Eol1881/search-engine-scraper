@@ -2,7 +2,9 @@
   "name": "search-engine-scrapper",
   "version": "0.0.1",
   "scripts": {
-    "start-node": "node --experimental-strip-types --env-file=.env ./src/companies.cli/cli.update-saved-companies.mts",
+    "start": "node --experimental-strip-types --env-file=.env ./src/companies.cli/cli.update-saved-companies.mts",
+    "start-test": "node --experimental-strip-types --env-file=.env ./src/companies.cli-test/cli-test.update-saved-companies.mts",
+    "start-local-proxy": "node --experimental-strip-types --env-file=.env ./src/infra/local-proxy-server.mts",
     "start-bun": "bun run ./src/cli/cli.update-saved-companies.mts",
     "install-browsers": "playwright install",
     "type-check": "tsc --noEmit",
@@ -13,6 +15,7 @@
   "dependencies": {
     "@playwright/test": "^1.50.1",
     "playwright": "^1.50.1",
+    "socks": "^2.8.4",
     "user-agents": "^1.1.458",
     "zod": "^3.24.2"
   },

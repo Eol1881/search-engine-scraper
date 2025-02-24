@@ -4,10 +4,7 @@ import { z } from "zod";
 
 const ProxyConfigSchema = z.object({
   PROXY_IS_ALIVE: z.literal("TRUE").or(z.literal("FALSE")),
-  PROXY_PROTOCOL: z.string().nonempty(),
-  PROXY_LOGIN: z.string().nonempty(),
-  PROXY_PASSWORD: z.string().nonempty(),
-  PROXY_URL: z.string().nonempty(),
+  LOCAL_PROXY_PORT: z.string().nonempty(),
 });
 
 const proxyConfig = ProxyConfigSchema.parse(process.env);
@@ -20,21 +17,23 @@ export const cliConfig: CliConfig = {
     companies: "companies",
   },
   playwright: {
+    isTest: false,
     proxy: {
       isActive: proxyConfig.PROXY_IS_ALIVE === "TRUE",
-      protocol: proxyConfig.PROXY_PROTOCOL,
-      login: proxyConfig.PROXY_LOGIN,
-      password: proxyConfig.PROXY_PASSWORD,
-      url: proxyConfig.PROXY_URL,
+      port: proxyConfig.LOCAL_PROXY_PORT,
     },
     userAgent: {
       device: "desktop",
       platform: "Win32",
     },
+    testUrl: "https://2ip.ru",
+    // testUrl: 'https://abrahamjuliot.github.io/creepjs/',
+    // testUrl: "https://yandex.ru/search/?text=%D0%BF%D0%B8%D0%B4%D1%80&search_source=dzen_desktop_safe&lr=2",
+    // testUrl: "https://yandex.ru/search/?text=%D0%BF%D0%B8%D0%B4%D1%80&search_source=dzen_desktop_safe&lr=2"
+    // testUrl: "https://abrahamjuliot.github.io/creepjs/"
+    // testUrl: "https://httpbin.org/ip",
     browser: {
       headless: false,
-      // testUrl: 'https://abrahamjuliot.github.io/creepjs/',
-      testUrl: "https://yandex.ru/search/?text=%D0%BF%D0%B8%D0%B4%D1%80&search_source=dzen_desktop_safe&lr=2",
       slowMo: 250,
       timeout: 1000,
       additionalArgs: [

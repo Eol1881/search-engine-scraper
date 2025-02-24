@@ -19,7 +19,7 @@ export const cliConfig: CliConfig = {
   fsTables: {
     companies: "companies",
   },
-  puppeteer: {
+  playwright: {
     proxy: {
       isActive: proxyConfig.PROXY_IS_ALIVE === "TRUE",
       protocol: proxyConfig.PROXY_PROTOCOL,
@@ -32,9 +32,11 @@ export const cliConfig: CliConfig = {
       platform: "Win32",
     },
     browser: {
+      headless: false,
       // testUrl: 'https://abrahamjuliot.github.io/creepjs/',
       testUrl: "https://yandex.ru/search/?text=%D0%BF%D0%B8%D0%B4%D1%80&search_source=dzen_desktop_safe&lr=2",
       slowMo: 250,
+      timeout: 1000,
       additionalArgs: [
         // "--no-sandbox",
         // "--disable-setuid-sandbox",
@@ -51,21 +53,18 @@ export const cliConfig: CliConfig = {
         // "--use-gl=swiftshader", // We can ensure WebGL and hardware acceleration are enabled to replicate the typical capabilities of a human-operated web browser by specifying specific arguments when launching our Chromium browser.
         // "--enable-accelerated-2d-canvas", // We can ensure WebGL and hardware acceleration are enabled to replicate the typical capabilities of a human-operated web browser by specifying specific arguments when launching our Chromium browser.
       ],
-      ignoredArgs: ["--disable-extensions"],
-      headless: false,
-      browserEnv: { DISPLAY: ":10.0" },
-      timeout: 0,
+      env: { DISPLAY: ":10.0" },
       fakeHeaders: {
-        "sec-ch-ua": '"Not/A)Brand";v="99", "Google Chrome";v="115", "Chromium";v="115"',
-        "sec-ch-ua-full-version": '"115.0.5790.110"',
+        // "sec-ch-ua": '"Not/A)Brand";v="99", "Google Chrome";v="115", "Chromium";v="115"',
+        // "sec-ch-ua-full-version": '"115.0.5790.110"',
 
-        "sec-ch-ua-model": '""',
-        "sec-ch-ua-arch": '"x86"',
-        "sec-ch-ua-bitness": '"64"',
-        "sec-ch-ua-platform": "Linux",
-        "sec-ch-ua-platform-version": "15.0.0",
-        "sec-ch-ua-full-version-list":
-          '"Not/A)Brand";v="99.0.0.0", "Google Chrome";v="115.0.5790.110", "Chromium";v="115.0.5790.110"',
+        // "sec-ch-ua-model": '""',
+        // "sec-ch-ua-arch": '"x86"',
+        // "sec-ch-ua-bitness": '"64"',
+        // "sec-ch-ua-platform": "Linux",
+        // "sec-ch-ua-platform-version": "15.0.0",
+        // "sec-ch-ua-full-version-list":
+        //   '"Not/A)Brand";v="99.0.0.0", "Google Chrome";v="115.0.5790.110", "Chromium";v="115.0.5790.110"',
 
         "sec-ch-ua-mobile": "?0",
         "sec-ch-ua-wow64": "?0",

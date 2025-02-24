@@ -1,7 +1,7 @@
 import UserAgent from "user-agents";
 import playwright from "playwright";
 
-export type PuppeteerConfig = {
+export type PlaywrightConfig = {
   proxy: {
     isActive: boolean;
     protocol: string;
@@ -12,9 +12,8 @@ export type PuppeteerConfig = {
   browser: {
     slowMo: number;
     additionalArgs: string[];
-    ignoredArgs: string[];
     headless: boolean;
-    browserEnv: Record<string, string>;
+    env: Record<string, string>;
     fakeHeaders: Record<string, string>;
     timeout: number;
     testUrl: string | null;
@@ -25,20 +24,14 @@ export type PuppeteerConfig = {
   };
 };
 
-export const buildPuppeteerGetPageContent =
-  (config: PuppeteerConfig) =>
+export const buildPlaywrightGetPageContent =
+  (config: PlaywrightConfig) =>
   async (url: string): Promise<string> => {
     const browser = await playwright.chromium.launch({
-      headless: false,
-      args: [
-        "--disable-blink-features=AutomationControlled", // This flag disables the JavaScript property navigator.webdriver from being true. Some websites use this property to detect if the browser is being controlled by automation tools like Puppeteer or Playwright.
-        "--disable-extensions", // This flag disables all Chrome extensions. Extensions can interfere with the behavior of the browser and the webpage, so it’s often best to disable them when automating browser tasks.
-        "--disable-infobars", // This flag disables infobars on the top of the browser window, such as the “Chrome is being controlled by automated test software” infobar.
-        "--no-first-run", // This flag skips the first-run experience in Chrome, which is a series of setup steps shown the first time Chrome is launched.
-        // "--enable-webgl", // We can ensure WebGL and hardware acceleration are enabled to replicate the typical capabilities of a human-operated web browser by specifying specific arguments when launching our Chromium browser.
-        // "--use-gl=swiftshader", // We can ensure WebGL and hardware acceleration are enabled to replicate the typical capabilities of a human-operated web browser by specifying specific arguments when launching our Chromium browser.
-        // "--enable-accelerated-2d-canvas", // We can ensure WebGL and hardware acceleration are enabled to replicate the typical capabilities of a human-operated web browser by specifying specific arguments when launching our Chromium browser.
-      ],
+      slowMo: config.browser.slowMo,
+      headless: config.browser.headless,
+      args: config.browser.additionalArgs,
+      env: config.browser.env,
     });
 
     // if (config.proxy.isActive === true) {
@@ -98,7 +91,6 @@ export const buildPuppeteerGetPageContent =
     });
 
     const content = await page.content();
-    console.log(7, content);
 
     await browser.close();
 

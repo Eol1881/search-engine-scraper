@@ -7,6 +7,7 @@
     "start-local-proxy": "node --experimental-strip-types --env-file=.env ./src/infra/local-proxy-server.mts",
     "start-bun": "bun run ./src/cli/cli.update-saved-companies.mts",
     "install-browsers": "playwright install",
+    "install-patched-browsers": "rebrowser-playwright install",
     "type-check": "tsc --noEmit",
     "prepare": "husky install",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",

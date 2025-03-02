@@ -4,10 +4,10 @@ import { cliRunCommand } from "../cli/cli.run-command.mts";
 
 const main = async () => {
   const composer = buildCli(cliConfig);
-
-  await cliRunCommand("UpdateSavedCompanies", ([search, start, limit]) =>
-    composer.updateSavedCompanies(search, +start, +limit)
-  );
+  composer.updateSavedCompanies("test", 1, 1);
+  // await cliRunCommand("UpdateSavedCompanies", ([search, start, limit]) =>
+  //   composer.updateSavedCompanies(search, +start, +limit)
+  // );
 };
 
 main();

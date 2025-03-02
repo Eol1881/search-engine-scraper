@@ -11,7 +11,6 @@ export type PlaywrightConfig = {
     headless: boolean;
     env: Record<string, string>;
     fakeHeaders: Record<string, string>;
-    timeout: number;
   };
   userAgent: {
     device: "desktop" | "mobile" | "tablet";
@@ -43,14 +42,14 @@ export const buildPlaywrightGetPageContent =
       extraHTTPHeaders: config.browser.fakeHeaders,
     });
 
-    await context.addCookies([
-      {
-        name: "sample_cookie",
-        value: "0b484c21dba17c9e2fff8a4da0bac12d",
-        domain: "www.sample.com",
-        path: "/",
-      },
-    ]);
+    // await context.addCookies([
+    //   {
+    //     name: "sample_cookie",
+    //     value: "0b484c21dba17c9e2fff8a4da0bac12d",
+    //     domain: "www.sample.com",
+    //     path: "/",
+    //   },
+    // ]);
 
     const page = await context.newPage();
 
@@ -64,6 +63,16 @@ export const buildPlaywrightGetPageContent =
 
     if (config.isTest && config.testUrl) {
       await page.goto(config.testUrl, { waitUntil: "domcontentloaded" });
+
+      if (config.testUrl.includes("rebrowser")) {
+        await page.evaluate(() => {
+          const windowPatched = window as unknown as Window & { dummyFn: () => void };
+          windowPatched.dummyFn();
+        });
+        await page.exposeFunction("exposedFn", () => console.log("exposedFn call"));
+        await page.evaluate(() => document.getElementById("detections-json"));
+      }
+
       await page.screenshot({
         path: `./screens/${Date.now()}-result.png`,
         fullPage: true,
@@ -73,7 +82,6 @@ export const buildPlaywrightGetPageContent =
     }
 
     await page.goto(url, {
-      timeout: config.browser.timeout,
       waitUntil: "domcontentloaded",
     });
 

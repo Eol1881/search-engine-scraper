@@ -26,20 +26,21 @@ export const cliConfig: CliConfig = {
       device: "desktop",
       platform: "Win32",
     },
-    testUrl: "https://2ip.ru",
-    // testUrl: 'https://abrahamjuliot.github.io/creepjs/',
+    // testUrl: "https://2ip.ru",
+    // testUrl: "https://abrahamjuliot.github.io/creepjs/",
     // testUrl: "https://yandex.ru/search/?text=%D0%BF%D0%B8%D0%B4%D1%80&search_source=dzen_desktop_safe&lr=2",
-    // testUrl: "https://yandex.ru/search/?text=%D0%BF%D0%B8%D0%B4%D1%80&search_source=dzen_desktop_safe&lr=2"
-    // testUrl: "https://abrahamjuliot.github.io/creepjs/"
+    testUrl: "https://www.scrapingcourse.com/antibot-challenge",
+    // testUrl: "https://yandex.ru",
+    // testUrl: "https://ya.ru",
     // testUrl: "https://httpbin.org/ip",
+    // testUrl: "https://bot-detector.rebrowser.net/",
+    // testUrl: "https://antcpt.com/score_detector/",
     browser: {
       headless: false,
       slowMo: 250,
-      timeout: 1000,
       additionalArgs: [
         // "--no-sandbox",
         // "--disable-setuid-sandbox",
-        // "--disable-infobars",
         // "--no-zygote",
         // "--disable-dev-shm-usage",
         // "--disable-gpu",
@@ -54,34 +55,28 @@ export const cliConfig: CliConfig = {
       ],
       env: { DISPLAY: ":10.0" },
       fakeHeaders: {
-        // "sec-ch-ua": '"Not/A)Brand";v="99", "Google Chrome";v="115", "Chromium";v="115"',
+        // "sec-ch-ua": '"Not(A:Brand";v="99", "Google Chrome";v="133", "Chromium";v="133"',
+        "sec-ch-ua-arch": '"x86"',
+        "sec-ch-ua-bitness": '"64"',
         // "sec-ch-ua-full-version": '"115.0.5790.110"',
-
+        // "sec-ch-ua-full-version-list": '"Not/A)Brand";v="99.0.0.0", "Google Chrome";v="115.0.5790.110", "Chromium";v="115.0.5790.110"',
         // "sec-ch-ua-model": '""',
-        // "sec-ch-ua-arch": '"x86"',
-        // "sec-ch-ua-bitness": '"64"',
-        // "sec-ch-ua-platform": "Linux",
+        // "sec-ch-ua-mobile": "?0",
+        // "sec-ch-ua-platform": "Windows",
         // "sec-ch-ua-platform-version": "15.0.0",
-        // "sec-ch-ua-full-version-list":
-        //   '"Not/A)Brand";v="99.0.0.0", "Google Chrome";v="115.0.5790.110", "Chromium";v="115.0.5790.110"',
-
-        "sec-ch-ua-mobile": "?0",
         "sec-ch-ua-wow64": "?0",
-
         "sec-fetch-dest": "document",
         "sec-fetch-mode": "navigate",
         "sec-fetch-site": "same-origin",
         "sec-fetch-user": "?1",
 
-        "upgrade-insecure-requests": "1",
-
-        Accept:
-          "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-        "Accept-Encoding": "gzip, deflate, br",
-        "Accept-Language": "ru-RU,ru;q=0.9",
-
-        "Cache-Control": "max-age=0",
-        Connection: "keep-alive",
+        // "upgrade-insecure-requests": "1",
+        // Accept:
+        //   "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+        // "Accept-Encoding": "gzip, deflate, br",
+        // "Accept-Language": "ru-RU,ru;q=0.9",
+        // "Cache-Control": "max-age=0",
+        // Connection: "keep-alive",
       },
     },
   },

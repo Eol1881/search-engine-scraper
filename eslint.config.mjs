@@ -16,7 +16,7 @@ const eslintConfig = [
   //   extends: ["plugin:@limegrass/import-alias/recommended", "prettier"],
   // }),
   {
-    files: ["**/*.{js,mjs,cjs,ts}"],
+    files: ["**/*.{js,mjs,cjs,ts, mts}"],
     languageOptions: { globals: { ...globals.browser, ...globals.node } },
     settings: {},
     rules: {},

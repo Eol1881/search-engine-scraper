@@ -14,7 +14,8 @@ export const cliConfig: CliConfig = {
     dbPath: "db",
   },
   fsTables: {
-    companies: "companies",
+    companies: "output",
+    searchResults: "input",
   },
   playwright: {
     isTest: false,

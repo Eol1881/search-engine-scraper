@@ -11,6 +11,6 @@ export const buildFsSaveCompany =
     const fileName = companiesTableName + ".json";
     const savedCompanies = await read(fileName);
     const companies = JSON.parse(savedCompanies || "[]");
-    const data = JSON.stringify([...companies, company]);
+    const data = JSON.stringify([...companies, company], null, 2);
     await save(fileName, data);
   };
